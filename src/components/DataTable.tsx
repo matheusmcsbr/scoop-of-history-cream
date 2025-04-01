@@ -60,6 +60,12 @@ const DataTable = () => {
           item.source.toLowerCase().includes(searchTerm.toLowerCase())
         );
         break;
+      case 'future-projections':
+        filteredData = data.futureMarketProjections.filter(item => 
+          item.year.toString().includes(searchTerm) || 
+          item.source.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        break;
       case 'consumption':
         filteredData = data.consumptionData.filter(item => 
           item.year.toString().includes(searchTerm) || 
@@ -106,11 +112,30 @@ const DataTable = () => {
           item.source.toLowerCase().includes(searchTerm.toLowerCase())
         );
         break;
+      case 'italian-gelato':
+        filteredData = data.italianGelatoData.map(item => ({
+          year: item.year,
+          marketSharePercentage: item.marketSharePercentage,
+          averagePricePerScoop: item.averagePricePerScoop,
+          topFlavor: item.popularFlavors[0].flavor,
+          source: item.source
+        })).filter(item => 
+          item.year.toString().includes(searchTerm) || 
+          item.topFlavor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.source.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        break;
+      case 'gelato-comparison':
+        filteredData = data.gelatoVsIceCreamComparison.filter(item => 
+          item.category.toLowerCase().includes(searchTerm.toLowerCase()) || 
+          item.source.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        break;
       default:
         filteredData = [];
     }
     
-    if (activeTab === 'market-size' || activeTab === 'consumption' || activeTab === 'price-data') {
+    if (['market-size', 'consumption', 'price-data', 'future-projections', 'italian-gelato'].includes(activeTab)) {
       filteredData.sort((a, b) => sortOrder === 'desc' ? b.year - a.year : a.year - b.year);
     }
     
@@ -125,6 +150,13 @@ const DataTable = () => {
         return [
           { header: 'Year', key: 'year' },
           { header: 'Market Size (Billions $)', key: 'sizeInBillions' },
+          { header: 'Source', key: 'source' },
+        ];
+      case 'future-projections':
+        return [
+          { header: 'Year', key: 'year' },
+          { header: 'Projected Size (Billions $)', key: 'projectedSizeInBillions' },
+          { header: 'Growth (%)', key: 'growthPercentage' },
           { header: 'Source', key: 'source' },
         ];
       case 'consumption':
@@ -173,6 +205,22 @@ const DataTable = () => {
           { header: 'Percentage of Annual Sales', key: 'percentageOfAnnualSales' },
           { header: 'Source', key: 'source' },
         ];
+      case 'italian-gelato':
+        return [
+          { header: 'Year', key: 'year' },
+          { header: 'Market Share (%)', key: 'marketSharePercentage' },
+          { header: 'Price Per Scoop ($)', key: 'averagePricePerScoop' },
+          { header: 'Top Flavor', key: 'topFlavor' },
+          { header: 'Source', key: 'source' },
+        ];
+      case 'gelato-comparison':
+        return [
+          { header: 'Category', key: 'category' },
+          { header: 'Gelato (%)', key: 'gelatoPercentage' },
+          { header: 'Regular Ice Cream (%)', key: 'regularIceCreamPercentage' },
+          { header: 'Year', key: 'year' },
+          { header: 'Source', key: 'source' },
+        ];
       default:
         return [];
     }
@@ -183,6 +231,7 @@ const DataTable = () => {
   const getTabTitle = () => {
     switch(activeTab) {
       case 'market-size': return 'Market Size Data';
+      case 'future-projections': return 'Future Market Projections';
       case 'consumption': return 'Per Capita Consumption';
       case 'flavor-popularity': return 'Flavor Popularity';
       case 'price-data': return 'Price Data';
@@ -190,6 +239,8 @@ const DataTable = () => {
       case 'producer-data': return 'Producer Market Share';
       case 'sales-channel': return 'Sales Channel Distribution';
       case 'seasonal-trend': return 'Seasonal Sales Trends';
+      case 'italian-gelato': return 'Italian Gelato Data';
+      case 'gelato-comparison': return 'Gelato vs Ice Cream Comparison';
       default: return '';
     }
   };
@@ -206,9 +257,10 @@ const DataTable = () => {
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <div className="pb-4">
-            <TabsList className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2">
+          <div className="pb-4 overflow-x-auto">
+            <TabsList className="flex min-w-max">
               <TabsTrigger value="market-size">Market Size</TabsTrigger>
+              <TabsTrigger value="future-projections">Projections</TabsTrigger>
               <TabsTrigger value="consumption">Consumption</TabsTrigger>
               <TabsTrigger value="flavor-popularity">Flavors</TabsTrigger>
               <TabsTrigger value="price-data">Prices</TabsTrigger>
@@ -216,6 +268,8 @@ const DataTable = () => {
               <TabsTrigger value="producer-data">Producers</TabsTrigger>
               <TabsTrigger value="sales-channel">Channels</TabsTrigger>
               <TabsTrigger value="seasonal-trend">Seasonal</TabsTrigger>
+              <TabsTrigger value="italian-gelato">Gelato</TabsTrigger>
+              <TabsTrigger value="gelato-comparison">Gelato vs Ice Cream</TabsTrigger>
             </TabsList>
           </div>
           

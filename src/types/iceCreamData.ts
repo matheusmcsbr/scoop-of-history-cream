@@ -5,6 +5,13 @@ export interface MarketSize {
   source: string;
 }
 
+export interface FutureMarketProjection {
+  year: number;
+  projectedSizeInBillions: number;
+  growthPercentage: number;
+  source: string;
+}
+
 export interface Consumption {
   year: number;
   gallonsPerCapita: number;
@@ -48,5 +55,24 @@ export interface SalesChannel {
 export interface SeasonalTrend {
   month: string;
   percentageOfAnnualSales: number;
+  source: string;
+}
+
+export interface ItalianGelatoData {
+  year: number;
+  marketSharePercentage: number;
+  averagePricePerScoop: number;
+  popularFlavors: {
+    flavor: string;
+    percentagePopularity: number;
+  }[];
+  source: string;
+}
+
+export interface GelatoVsIceCreamComparison {
+  category: string;
+  gelatoPercentage: number;
+  regularIceCreamPercentage: number;
+  year: number;
   source: string;
 }

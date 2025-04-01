@@ -7,10 +7,16 @@ import {
   DollarSign, 
   ShoppingBasket,
   Users,
-  Zap
+  Zap,
+  IceCream,
+  ChefHat
 } from 'lucide-react';
+import { italianGelatoData } from '@/services/iceCreamDataService';
 
 const StatsCards = () => {
+  // Get latest gelato data
+  const latestGelatoData = italianGelatoData[italianGelatoData.length - 1];
+  
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card className="ice-cream-gradient shadow-md hover:shadow-lg transition-shadow">
@@ -87,6 +93,32 @@ const StatsCards = () => {
             <p className="text-white text-sm font-medium">Peak Season</p>
             <h3 className="text-white text-2xl font-bold mt-1">July</h3>
             <p className="text-white/80 text-xs mt-1">14.8% of annual sales</p>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-gradient-to-br from-green-200 to-green-400 shadow-md hover:shadow-lg transition-shadow">
+        <CardContent className="pt-6 flex items-start">
+          <div className="bg-white/90 p-2 rounded-full mr-4 shadow-sm">
+            <ChefHat className="h-5 w-5 text-green-600" />
+          </div>
+          <div>
+            <p className="text-white text-sm font-medium">Italian Gelato Share</p>
+            <h3 className="text-white text-2xl font-bold mt-1">{latestGelatoData.marketSharePercentage}%</h3>
+            <p className="text-white/80 text-xs mt-1">of US Ice Cream Market (2023)</p>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-gradient-to-br from-red-200 to-red-400 shadow-md hover:shadow-lg transition-shadow">
+        <CardContent className="pt-6 flex items-start">
+          <div className="bg-white/90 p-2 rounded-full mr-4 shadow-sm">
+            <IceCream className="h-5 w-5 text-red-600" />
+          </div>
+          <div>
+            <p className="text-white text-sm font-medium">Gelato Avg. Price</p>
+            <h3 className="text-white text-2xl font-bold mt-1">${latestGelatoData.averagePricePerScoop}</h3>
+            <p className="text-white/80 text-xs mt-1">Per Scoop (2023)</p>
           </div>
         </CardContent>
       </Card>

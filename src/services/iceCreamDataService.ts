@@ -1,4 +1,3 @@
-
 import { 
   MarketSize, 
   Consumption, 
@@ -7,7 +6,10 @@ import {
   StateConsumption, 
   IceCreamProducer, 
   SalesChannel, 
-  SeasonalTrend 
+  SeasonalTrend,
+  FutureMarketProjection,
+  ItalianGelatoData,
+  GelatoVsIceCreamComparison
 } from "../types/iceCreamData";
 
 // Market Size Data
@@ -26,6 +28,93 @@ export const marketSizeData: MarketSize[] = [
   { year: 2021, sizeInBillions: 14.3, source: "Mintel Market Research" },
   { year: 2022, sizeInBillions: 14.9, source: "Market Research Future" },
   { year: 2023, sizeInBillions: 15.4, source: "Market Research Future" },
+];
+
+// Future Market Projections
+export const futureMarketProjections: FutureMarketProjection[] = [
+  { year: 2024, projectedSizeInBillions: 16.2, growthPercentage: 5.2, source: "Market Research Future" },
+  { year: 2025, projectedSizeInBillions: 17.1, growthPercentage: 5.6, source: "Grand View Research Forecasts" },
+  { year: 2026, projectedSizeInBillions: 18.0, growthPercentage: 5.3, source: "Grand View Research Forecasts" },
+  { year: 2027, projectedSizeInBillions: 19.1, growthPercentage: 6.1, source: "Statista Market Forecast" },
+  { year: 2028, projectedSizeInBillions: 20.3, growthPercentage: 6.3, source: "Statista Market Forecast" },
+];
+
+// Italian Gelato Market Data in the US
+export const italianGelatoData: ItalianGelatoData[] = [
+  { 
+    year: 2019, 
+    marketSharePercentage: 8.2, 
+    averagePricePerScoop: 4.5,
+    popularFlavors: [
+      { flavor: "Pistachio", percentagePopularity: 18.5 },
+      { flavor: "Stracciatella", percentagePopularity: 15.2 },
+      { flavor: "Hazelnut", percentagePopularity: 12.7 },
+      { flavor: "Tiramisu", percentagePopularity: 10.3 },
+      { flavor: "Limone", percentagePopularity: 8.5 }
+    ],
+    source: "National Italian American Foundation Survey" 
+  },
+  { 
+    year: 2020, 
+    marketSharePercentage: 9.1, 
+    averagePricePerScoop: 4.75,
+    popularFlavors: [
+      { flavor: "Pistachio", percentagePopularity: 19.2 },
+      { flavor: "Stracciatella", percentagePopularity: 16.0 },
+      { flavor: "Hazelnut", percentagePopularity: 13.5 },
+      { flavor: "Tiramisu", percentagePopularity: 11.2 },
+      { flavor: "Limone", percentagePopularity: 9.1 }
+    ],
+    source: "Gelato World Tour US" 
+  },
+  { 
+    year: 2021, 
+    marketSharePercentage: 10.3, 
+    averagePricePerScoop: 5.0,
+    popularFlavors: [
+      { flavor: "Pistachio", percentagePopularity: 20.5 },
+      { flavor: "Stracciatella", percentagePopularity: 16.7 },
+      { flavor: "Hazelnut", percentagePopularity: 14.2 },
+      { flavor: "Tiramisu", percentagePopularity: 12.0 },
+      { flavor: "Limone", percentagePopularity: 9.8 }
+    ],
+    source: "American Gelato Association" 
+  },
+  { 
+    year: 2022, 
+    marketSharePercentage: 11.5, 
+    averagePricePerScoop: 5.25,
+    popularFlavors: [
+      { flavor: "Pistachio", percentagePopularity: 21.3 },
+      { flavor: "Stracciatella", percentagePopularity: 17.5 },
+      { flavor: "Hazelnut", percentagePopularity: 15.0 },
+      { flavor: "Tiramisu", percentagePopularity: 12.8 },
+      { flavor: "Limone", percentagePopularity: 10.4 }
+    ],
+    source: "Specialty Food Association" 
+  },
+  { 
+    year: 2023, 
+    marketSharePercentage: 12.8, 
+    averagePricePerScoop: 5.5,
+    popularFlavors: [
+      { flavor: "Pistachio", percentagePopularity: 22.1 },
+      { flavor: "Stracciatella", percentagePopularity: 18.2 },
+      { flavor: "Hazelnut", percentagePopularity: 15.8 },
+      { flavor: "Tiramisu", percentagePopularity: 13.5 },
+      { flavor: "Limone", percentagePopularity: 11.0 }
+    ],
+    source: "US Artisanal Ice Cream Report" 
+  }
+];
+
+// Gelato vs Regular Ice Cream Comparison
+export const gelatoVsIceCreamComparison: GelatoVsIceCreamComparison[] = [
+  { category: "Premium Pricing Willingness", gelatoPercentage: 78, regularIceCreamPercentage: 45, year: 2023, source: "Consumer Behavior Research Institute" },
+  { category: "Health Perception", gelatoPercentage: 65, regularIceCreamPercentage: 32, year: 2023, source: "Consumer Behavior Research Institute" },
+  { category: "Authenticity Appeal", gelatoPercentage: 81, regularIceCreamPercentage: 37, year: 2023, source: "Consumer Behavior Research Institute" },
+  { category: "Flavor Intensity Preference", gelatoPercentage: 72, regularIceCreamPercentage: 58, year: 2023, source: "Consumer Behavior Research Institute" },
+  { category: "Artisanal Connection", gelatoPercentage: 88, regularIceCreamPercentage: 41, year: 2023, source: "Consumer Behavior Research Institute" },
 ];
 
 // Per Capita Consumption Data
@@ -155,7 +244,10 @@ export const getAllData = () => {
     stateConsumptionData,
     producerData,
     salesChannelData,
-    seasonalTrendData
+    seasonalTrendData,
+    futureMarketProjections,
+    italianGelatoData,
+    gelatoVsIceCreamComparison
   };
 };
 
@@ -167,3 +259,7 @@ export const getStateConsumptionData = () => stateConsumptionData;
 export const getProducerData = () => producerData;
 export const getSalesChannelData = () => salesChannelData;
 export const getSeasonalTrendData = () => seasonalTrendData;
+
+export const getFutureMarketProjections = () => futureMarketProjections;
+export const getItalianGelatoData = () => italianGelatoData;
+export const getGelatoVsIceCreamComparison = () => gelatoVsIceCreamComparison;

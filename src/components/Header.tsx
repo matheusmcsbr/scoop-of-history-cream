@@ -13,7 +13,7 @@ const Header = () => {
           </h1>
         </div>
         <div className="text-sm text-muted-foreground">
-          US Ice Cream Market Historical Data
+          US Ice Cream & Italian Gelato Market Data
         </div>
       </div>
     </header>

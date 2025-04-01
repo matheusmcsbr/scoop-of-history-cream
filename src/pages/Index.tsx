@@ -11,6 +11,10 @@ import ProducersPieChart from '@/components/ProducersPieChart';
 import SeasonalTrendChart from '@/components/SeasonalTrendChart';
 import DataTable from '@/components/DataTable';
 import SourcesInfo from '@/components/SourcesInfo';
+import FutureMarketChart from '@/components/FutureMarketChart';
+import GelatoMarketChart from '@/components/GelatoMarketChart';
+import GelatoFlavorsChart from '@/components/GelatoFlavorsChart';
+import GelatoVsIceCreamChart from '@/components/GelatoVsIceCreamChart';
 
 const Index = () => {
   return (
@@ -29,17 +33,31 @@ const Index = () => {
         </section>
         
         <section className="mb-10">
-          <h2 className="text-xl font-semibold mb-4">Market Trends</h2>
+          <h2 className="text-xl font-semibold mb-4">Market Trends & Projections</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <MarketSizeChart />
-            <ConsumptionChart />
+            <FutureMarketChart />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <ConsumptionChart />
             <PriceChart />
-            <FlavorPopularityChart />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FlavorPopularityChart />
             <ProducersPieChart />
+          </div>
+        </section>
+        
+        <section className="mb-10">
+          <h2 className="text-xl font-semibold mb-4">Italian Gelato in US Market</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <GelatoMarketChart />
+            <GelatoFlavorsChart />
+          </div>
+          <div className="mb-6">
+            <GelatoVsIceCreamChart />
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
             <SeasonalTrendChart />
           </div>
         </section>
